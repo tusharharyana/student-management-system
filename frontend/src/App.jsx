@@ -1,35 +1,33 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 function App(){
-    
+
     // {"id":1,"name":"John Doe","course":"Computer Science"}
 
-    const [student, setStudent] = useState(null);
 
-    const getStudent = async () => {
+    const [students, setStudents] = useState({});
 
+    const getStudentData = async () => {
+    
             const response = await fetch('http://localhost:8080/students');
             const data = await response.json();
-            setStudent(data);
-
+            setStudents(data);
     }
 
     return (
         <div>
-
-            <button onClick={getStudent}>
-                Fetch Student
+            <button onClick={getStudentData}>
+                Get Student Data
             </button>
+            
+            <h1>This is the student data:</h1>
 
-            <br />
-            <h1>Here will be student data:</h1>
-
-            <h1>{student?.name}</h1>
-            <h2>{student?.course}</h2>
-            <h3>{student?.id}</h3>
+            <h2>{students.name}</h2>
+            <h3>{students.course}</h3>
+            <h4>{students.id}</h4>
 
         </div>
-    )
+    );
 }
 
 export default App;
