@@ -5,7 +5,7 @@ function App(){
     // {"id":1,"name":"John Doe","course":"Computer Science"}
 
 
-    const [students, setStudents] = useState({});
+    const [students, setStudents] = useState([]);
 
     const getStudentData = async () => {
     
@@ -21,10 +21,14 @@ function App(){
             </button>
             
             <h1>This is the student data:</h1>
-
-            <h2>{students.name}</h2>
-            <h3>{students.course}</h3>
-            <h4>{students.id}</h4>
+            
+            <ul>
+                {students.map(student => (
+                    <li key={student.id}>
+                        {student.name} - {student.course}
+                    </li>
+                ))}
+            </ul>
 
         </div>
     );
