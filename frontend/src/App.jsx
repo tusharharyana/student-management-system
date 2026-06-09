@@ -3,6 +3,7 @@ import { useState } from "react";
 function App() {
 
   const [students, setStudents] = useState([]);
+  const [count, setCount] = useState(0);
 
   const getStudents = async () => {
 
@@ -21,6 +22,13 @@ function App() {
     const data = await response.json();
 
     setStudents(data);
+  };
+
+
+  const fetchTotalStudentCount = async () => {
+    const response = await fetch("http://localhost:8080/students/count");
+    const data = await response.json();
+    setCount(data);
   };
 
   return (
@@ -42,6 +50,12 @@ function App() {
         ))}
       </ul>
 
+
+      <button onClick={fetchTotalStudentCount}>
+        Get Total Student Count
+      </button>
+
+      <p>Total students: {count}</p>
 
     </div>
   );

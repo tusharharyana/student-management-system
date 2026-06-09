@@ -6,10 +6,16 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import com.example.sms.service.StudentService;
+
 @RestController
 @RequestMapping("/students")
 @CrossOrigin("*")
 public class StudentController {
+
+    @Autowired
+    private StudentService service;
 
     @GetMapping
     public ArrayList<Student> getStudents() {
@@ -29,6 +35,17 @@ public class StudentController {
         return getStudents().stream()
                 .filter(student -> "Bca".equals(student.getCourse()))
                 .collect(Collectors.toList());
+    }
+
+
+    @GetMapping("/count")
+    public int countStudents(){
+        return service.getStudentCount();
+    }
+
+    @GetMapping("/message")
+    public String getMessage(){
+        return service.getStudentInfo();
     }
 
 }
